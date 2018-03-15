@@ -1,4 +1,7 @@
 import { NgModule } from '@angular/core';
+
+
+
 import { Routes, RouterModule } from '@angular/router';
 
 import { NaoAutorizadoComponent } from './core/nao-autorizado.component';
