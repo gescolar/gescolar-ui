@@ -50,7 +50,7 @@ export class ErrorHandlerService {
       console.error('Ocorreu um erro', errorResponse);
     }
 
-    this.growMessageService.addSingleError('Erro', msg);
+    this.growMessageService.addErro(msg);
   }
 
 }

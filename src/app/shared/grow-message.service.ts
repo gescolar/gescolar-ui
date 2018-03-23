@@ -27,8 +27,12 @@ export class GrowMessageService {
     this.addSingle(this.SUCCESS, summary, detail);
   }
 
-  addSuccess(detail: string) {
+  addSucesso(detail: string) {
     this.addSingleSuccess('Sucesso', detail);
+  }
+
+  addErro(detail: string) {
+    this.addSingleError('Mensagem de Erro', detail);
   }
 
 
