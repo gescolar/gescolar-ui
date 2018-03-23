@@ -1,3 +1,5 @@
+import { SharedModule } from './../shared/shared.module';
+import { GrowMessageService } from './../shared/grow-message.service';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
@@ -5,12 +7,15 @@ import { Response } from '@angular/http';
 import { NotAuthenticatedError } from './../seguranca/money-http';
 import { ToastyService } from 'ng2-toasty';
 
+import {MessageService} from 'primeng/components/common/messageservice';
+
 @Injectable()
 export class ErrorHandlerService {
 
   constructor(
     private toasty: ToastyService,
-    private router: Router
+    private router: Router,
+    private growMessageService: GrowMessageService,
   ) { }
 
   handle(errorResponse: any) {
@@ -45,7 +50,7 @@ export class ErrorHandlerService {
       console.error('Ocorreu um erro', errorResponse);
     }
 
-    this.toasty.error(msg);
+    this.growMessageService.addSingleError('Erro', msg);
   }
 
 }
