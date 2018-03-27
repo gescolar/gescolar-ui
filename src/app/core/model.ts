@@ -30,3 +30,17 @@ export class Lancamento {
   pessoa = new Pessoa();
   categoria = new Categoria();
 }
+
+
+export class Professor {
+  idProfessor: number;
+  nome: string;
+  email: string;
+  celular: string;
+  telefone: string;
+}
+
+export class Usuario {
+  login: string;
+  tipoUsuario: String;
+}

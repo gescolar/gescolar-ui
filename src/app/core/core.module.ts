@@ -1,3 +1,4 @@
+import { ProfessorService } from './../professores/professor.service';
 
 import { GrowMessageService } from './../shared/grow-message.service';
 
@@ -47,7 +48,7 @@ import {MessageService} from 'primeng/components/common/messageservice';
     ErrorHandlerService,
     AuthService,
     ConfirmationService,
-
+    ProfessorService,
     GrowMessageService,
     JwtHelper,
     Title,

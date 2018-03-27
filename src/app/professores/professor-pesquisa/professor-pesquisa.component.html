@@ -1,0 +1,39 @@
+<div class="ui-fluid">
+  <div class="ui-g">
+      <div class="ui-g-12">
+          <div class="card no-margin">
+            <h1>Professores</h1>
+
+              <div class="ui-g form-group">
+                  <div class="ui-g-12 ui-md-7">
+                        <span class="md-inputfield">
+                            <input id="input" type="text" pInputText/>
+                            <label>Pesquisar Professor Por Nome</label>
+                        </span>
+                    </div>
+
+                    <div class="ui-g-12 ui-md-1" style="padding-left: 1px;">
+                        <button type="button" icon="ui-icon-search" pButton></button>
+                  </div>
+
+
+          </div>
+      </div>
+  </div>
+
+  <div class="card card-w-title">
+
+      <p-dataTable [value]="professores" [responsive]="true"
+        emptyMessage="Nenhuma pessoa encontrada"
+        [paginator]="true" [rows]="filtro.itensPorPagina"
+        [lazy]="true" [totalRecords]="totalRegistros"
+        (onLazyLoad)="aoMudarPagina($event)"
+        #tabela>
+          <p-column field="nome" header="Nome"></p-column>
+
+
+      </p-dataTable>
+  </div>
+</div>
+
+
