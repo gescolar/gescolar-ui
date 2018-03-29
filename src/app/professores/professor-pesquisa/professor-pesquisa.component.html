@@ -1,43 +1,48 @@
 <div class="ui-fluid">
   <div class="ui-g">
-      <div class="ui-g-12">
-          <div class="card no-margin">
-            <h1>Professores</h1>
-
-              <div class="ui-g form-group">
-                  <div class="ui-g-12 ui-md-7">
-                        <span class="md-inputfield">
-                            <input id="input" type="text" pInputText/>
-                            <label>Pesquisar Professor Por Nome</label>
-                        </span>
-                    </div>
-                  <div class="ui-g-12 ui-md-1" style="padding-left: 1px;">
-                        <button type="button" icon="ui-icon-search" pButton></button>
-                  </div>
+    <form autocomplete="off" (ngSubmit)="pesquisar()">
+      <div class="card no-margin">
+        <h1>Professores</h1>
+        <div class="ui-g form-group">
+          <div class="ui-g-12 ui-md-6">
+            <div class="ui-inputgroup">
+              <span class="md-inputfield">
+                <input type="text" pInputText [(ngModel)]="filtro.nome" name="nome">
+                <label>Pesquisar Professor Por Nome</label>
+              </span>
+              <button pButton type="submit" icon="ui-icon-search"></button>
+            </div>
           </div>
+
+          <div class="ui-g-12">
+            <p-dataTable [value]="professores" [responsive]="true" emptyMessage="Nenhuma pessoa encontrada" [paginator]="true" [rows]="filtro.itensPorPagina"
+              [lazy]="true" [totalRecords]="totalRegistros" (onLazyLoad)="aoMudarPagina($event)" #tabela>
+              <p-column field="nome" header="Nome"></p-column>
+              <p-column field="telefone" header="Telefone"></p-column>
+              <p-column field="celular" header="Celular"></p-column>
+              <p-column field="email" header="Email"></p-column>
+
+              <p-column styleClass="col-acoes" header="Editar">
+                <ng-template let-prof="rowData" pTemplate="body">
+                  <a pButton icon="ui-icon-edit" pTooltip="Editar" tooltipPosition="top" [routerLink]="['/professores', prof.idProfessor]"></a>
+                </ng-template>
+              </p-column>
+              <p-column styleClass="col-acoes" header="Excluir">
+                <ng-template let-prof="rowData" pTemplate="body">
+                  <button pButton icon="ui-icon-delete" pTooltip="Excluir" tooltipPosition="top" (click)="confirmarExclusao(pes)"></button>
+                </ng-template>
+              </p-column>
+
+            </p-dataTable>
+          </div>
+
+          <div class="ui-g-12 ui-md-2">
+            <div class="shadow-box ui-shadow-3">
+              <button type="button" label="Adicionar" pButton icon="ui-icon-add" routerLink="/professores/nova"></button>
+            </div>
+          </div>
+        </div>
       </div>
-  </div>
-
-
-
-
-
-
-
-
-  <div class="card card-w-title">
-
-      <p-dataTable [value]="professores" [responsive]="true"
-        emptyMessage="Nenhuma pessoa encontrada"
-        [paginator]="true" [rows]="filtro.itensPorPagina"
-        [lazy]="true" [totalRecords]="totalRegistros"
-        (onLazyLoad)="aoMudarPagina($event)"
-        #tabela>
-          <p-column field="nome" header="Nome"></p-column>
-
-
-      </p-dataTable>
+    </form>
   </div>
 </div>
-
-

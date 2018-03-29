@@ -1,3 +1,19 @@
-<p>
-  professor-cadastro works!
-</p>
+<div class="ui-fluid">
+  <div class="card no-margin">
+    <form [formGroup]="userform">
+      <h1>Cadastro Professor</h1>
+      <div class="ui-g form-group">
+        <div class="ui-g-12 ui-md-4">
+          <span class="md-inputfield">
+            <input type="text" pInputText formControlName="nome" [(ngModel)]="professor.nome" name="nome">
+            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['nome'].valid&&userform.controls['nome'].dirty">
+                <span *ngIf="userform.controls['nome'].errors['required']">O Campo Nome é Obrigatório.</span>
+                <span *ngIf="userform.controls['nome'].errors['minlength']">O Campo Nome deve conter no mínimo 4 caracteres.</span>
+            </div>
+            <label>Name</label>
+          </span>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

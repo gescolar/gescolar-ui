@@ -1,6 +1,6 @@
 import { ButtonModule } from 'primeng/components/button/button';
 import { InputTextModule } from 'primeng/components/inputtext/inputtext';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProfessoresRoutingModule } from './professores-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -93,6 +93,7 @@ import {TreeTableModule} from 'primeng/primeng';
     ProfessoresRoutingModule,
 
     FormsModule,
+    ReactiveFormsModule,
 
     InputTextModule,
     ButtonModule,

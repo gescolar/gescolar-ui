@@ -42,7 +42,7 @@ export class ProfessorService {
           professores,
           total: responseJson.totalElements
         };
-        console.log('entrou;;;');
+
         console.log(resultado);
         return resultado;
       });

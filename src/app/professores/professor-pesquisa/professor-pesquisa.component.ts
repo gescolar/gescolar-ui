@@ -39,7 +39,6 @@ export class ProfessorPesquisaComponent implements OnInit {
       .then(resultado => {
         this.totalRegistros = resultado.total;
         this.professores = resultado.professores;
-        //console.log('')
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
@@ -67,7 +66,7 @@ export class ProfessorPesquisaComponent implements OnInit {
           this.grid.first = 0;
         }
 
-       this.messageService.addSucesso('Pesssoa excluída com sucesso!');
+       this.messageService.addSucesso('Professor excluído com sucesso!');
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
