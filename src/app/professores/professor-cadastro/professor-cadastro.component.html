@@ -40,8 +40,8 @@
           </span>
         </div>
       </div>
-      <div class="ui-g">
 
+      <div class="ui-g">
         <div class="ui-g-12 ui-md-1">
           Sexo:
         </div>
@@ -56,16 +56,15 @@
           </div>
         </div>
       </div>
+
       <div class="ui-g">
         <div class="ui-g-12 ui-md-1">
           Foto:
         </div>
         <div class="ui-g-12 ui-md-1">
-            <img src="{{formulario.get('urlFoto').value}}" style="border-radius: 50%"  class="circular-image" />
-          <p-fileUpload name="anexo" mode="basic" auto="true" maxFileSize="100000000"
-          chooseLabel="Uplod" accept="image/*"
-          [url]="urlUploadAnexo" (onUpload)="aoTerminarUploadAnexo($event)"
-          (onBeforeSend)="antesUploadAnexo($event)"></p-fileUpload>
+          <img src="{{formulario.get('urlFoto').value}}" style="border-radius: 50%" class="circular-image" />
+          <p-fileUpload name="anexo" mode="basic" auto="true" maxFileSize="100000000" chooseLabel="Uplod" accept="image/*" [url]="urlUploadAnexo"
+            (onUpload)="aoTerminarUploadAnexo($event)" (onBeforeSend)="antesUploadAnexo($event)"></p-fileUpload>
         </div>
 
 
@@ -81,13 +80,13 @@
 
 
       <div class="ui-g">
-        <div class="ui-g-12 ui-md-2 ">
+        <div class="ui-g-12 ui-md-1 ">
           <button pButton type="submit" label="Salvar" [disabled]="formulario.invalid" icon="ui-icon-save"></button>
         </div>
-        <div class="ui-g-12 ui-md-2">
+        <div class="ui-g-12 ui-md-1">
           <button pButton type="button" label="Novo" (click)="novo()" icon="ui-icon-add-circle"></button>
         </div>
-        <div class="ui-g-12 ui-md-2">
+        <div class="ui-g-12 ui-md-1">
           <button pButton type="button" icon="ui-icon-arrow-back" label="Voltar Pesquisa" routerLink="/professores">
           </button>
         </div>
@@ -95,4 +94,3 @@
     </form>
   </div>
 </div>
-
