@@ -38,6 +38,8 @@ export class Professor {
   email: string;
   celular: string;
   telefone: string;
+  foto: String;
+  urlFoto: String;
 }
 
 export class Usuario {

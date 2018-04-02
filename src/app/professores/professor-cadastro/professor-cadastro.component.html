@@ -1,19 +1,98 @@
 <div class="ui-fluid">
   <div class="card no-margin">
-    <form [formGroup]="userform">
-      <h1>Cadastro Professor</h1>
+    <form [formGroup]="formulario" (ngSubmit)="salvar()" autocomplete="off">
+      <h1>
+        <h1>{{ editando ? 'Edição de' : 'Novo' }} Professor</h1>
+      </h1>
       <div class="ui-g form-group">
-        <div class="ui-g-12 ui-md-4">
+        <div class="ui-g-12 ui-md-7">
           <span class="md-inputfield">
-            <input type="text" pInputText formControlName="nome" [(ngModel)]="professor.nome" name="nome">
-            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['nome'].valid&&userform.controls['nome'].dirty">
-                <span *ngIf="userform.controls['nome'].errors['required']">O Campo Nome é Obrigatório.</span>
-                <span *ngIf="userform.controls['nome'].errors['minlength']">O Campo Nome deve conter no mínimo 4 caracteres.</span>
+            <input type="text" pInputText formControlName="nome" name="nome">
+            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!formulario.controls['nome'].valid&&formulario.controls['nome'].dirty">
+              <span *ngIf="formulario.controls['nome'].errors['required']">O Campo Nome é Obrigatório.</span>
+              <span *ngIf="formulario.controls['nome'].errors['minlength']">O Campo Nome deve conter no mínimo 4 caracteres.</span>
             </div>
             <label>Name</label>
           </span>
+        </div>
+
+        <div class="ui-g-12 ui-md-7">
+          <span class="md-inputfield">
+            <input type="text" pInputText formControlName="email" name="email">
+            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!formulario.controls['email'].valid&&formulario.controls['email'].dirty">
+              <span *ngIf="formulario.controls['email'].errors['pattern']">O Campo Email está invalido.</span>
+            </div>
+            <label>Email</label>
+          </span>
+        </div>
+
+        <div class="ui-g-12 ui-md-7">
+          <span class="md-inputfield">
+            <p-inputMask mask="(99-9999-9999)" formControlName="telefone" name="telefone"></p-inputMask>
+            <label>Telefone</label>
+          </span>
+        </div>
+
+        <div class="ui-g-12 ui-md-7">
+          <span class="md-inputfield">
+            <p-inputMask mask="(99-99999-9999)" formControlName="celular" name="celular"></p-inputMask>
+            <label>Celular</label>
+          </span>
+        </div>
+      </div>
+      <div class="ui-g">
+
+        <div class="ui-g-12 ui-md-1">
+          Sexo:
+        </div>
+        <div class="ui-g-12 ui-md-2">
+          <div class="ui-g">
+            <div class="ui-g-12">
+              <p-radioButton formControlName="sexo" name="sexo" value="M" label="Masculino"></p-radioButton>
+            </div>
+            <div class="ui-g-12">
+              <p-radioButton formControlName="sexo" name="sexo" value="F" label="Feminino"></p-radioButton>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ui-g">
+        <div class="ui-g-12 ui-md-1">
+          Foto:
+        </div>
+        <div class="ui-g-12 ui-md-1">
+            <img src="{{formulario.get('urlFoto').value}}" style="border-radius: 50%"  class="circular-image" />
+          <p-fileUpload name="anexo" mode="basic" auto="true" maxFileSize="100000000"
+          chooseLabel="Uplod" accept="image/*"
+          [url]="urlUploadAnexo" (onUpload)="aoTerminarUploadAnexo($event)"
+          (onBeforeSend)="antesUploadAnexo($event)"></p-fileUpload>
+        </div>
+
+
+
+      </div>
+      <div class="ui-g">
+        <p></p>
+
+      </div>
+      <hr>
+
+
+
+
+      <div class="ui-g">
+        <div class="ui-g-12 ui-md-2 ">
+          <button pButton type="submit" label="Salvar" [disabled]="formulario.invalid" icon="ui-icon-save"></button>
+        </div>
+        <div class="ui-g-12 ui-md-2">
+          <button pButton type="button" label="Novo" (click)="novo()" icon="ui-icon-add-circle"></button>
+        </div>
+        <div class="ui-g-12 ui-md-2">
+          <button pButton type="button" icon="ui-icon-arrow-back" label="Voltar Pesquisa" routerLink="/professores">
+          </button>
         </div>
       </div>
     </form>
   </div>
 </div>
+

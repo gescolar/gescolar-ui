@@ -10,7 +10,6 @@ import { CommonModule } from '@angular/common';
 
 import { ConfirmationService } from 'primeng/components/common/api';
 import { ConfirmDialogModule } from 'primeng/components/confirmdialog/confirmdialog';
-import { ToastyModule } from 'ng2-toasty';
 import { JwtHelper } from 'angular2-jwt';
 
 import { AuthService } from './../seguranca/auth.service';
@@ -28,7 +27,6 @@ import {MessageService} from 'primeng/components/common/messageservice';
     CommonModule,
     HttpModule,
     RouterModule,
-    ToastyModule.forRoot(),
     ConfirmDialogModule,
     GrowlModule,
 
@@ -40,7 +38,6 @@ import {MessageService} from 'primeng/components/common/messageservice';
   ],
   exports: [
     NavbarComponent,
-    ToastyModule,
     ConfirmDialogModule,
     GrowlModule
   ],

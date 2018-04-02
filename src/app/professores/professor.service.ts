@@ -60,21 +60,15 @@ export class ProfessorService {
       .then(() => null);
   }
 
-  mudarStatus(codigo: number, ativo: boolean): Promise<void> {
-    return this.http.put(`${this.ProfessorUrl}/${codigo}/ativo`, ativo)
-      .toPromise()
-      .then(() => null);
-  }
-
   adicionar(professor: Professor): Promise<Professor> {
-    return this.http.post(this.ProfessorUrl, JSON.stringify(Professor))
+    return this.http.post(this.ProfessorUrl, JSON.stringify(professor))
       .toPromise()
       .then(response => response.json());
   }
 
   atualizar(professor: Professor): Promise<Professor> {
     return this.http.put(`${this.ProfessorUrl}/${professor.idProfessor}`,
-        JSON.stringify(Professor))
+        JSON.stringify(professor))
       .toPromise()
       .then(response => response.json() as Professor);
   }
