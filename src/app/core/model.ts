@@ -33,7 +33,7 @@ export class Lancamento {
 
 
 export class Professor {
-  idProfessor: number;
+  codigo: number;
   nome: string;
   email: string;
   celular: string;

@@ -58,7 +58,7 @@ export class ProfessorPesquisaComponent implements OnInit {
   }
 
   excluir(professor: any) {
-    this.professorService.excluir(professor.idProfessor)
+    this.professorService.excluir(professor.codigo)
       .then(() => {
         if (this.grid.first === 0) {
           this.pesquisar();

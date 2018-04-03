@@ -41,7 +41,7 @@ export class ProfessorCadastroComponent implements OnInit {
 
   configuraFormulario() {
     this.formulario = this.fb.group({
-      'idProfessor': [],
+      'codigo': [],
       'nome': new FormControl('', Validators.compose([Validators.required, Validators.minLength(4)])),
       'email': new FormControl('', Validators.compose([Validators.pattern(this.emailPattern)])),
       'telefone': [],
@@ -53,7 +53,7 @@ export class ProfessorCadastroComponent implements OnInit {
   }
 
   get editando() {
-    return Boolean(this.formulario.get('idProfessor').value);
+    return Boolean(this.formulario.get('codigo').value);
   }
 
 
@@ -78,7 +78,7 @@ export class ProfessorCadastroComponent implements OnInit {
     this.professorService.adicionar(this.formulario.value)
       .then(professorAdicionada => {
         this.messageService.addSucesso('Professor adicionada com sucesso!');
-        this.router.navigate(['/professores', professorAdicionada.idProfessor]);
+        this.router.navigate(['/professores', professorAdicionada.codigo]);
       })
       .catch(erro => this.errorHandler.handle(erro));
   }

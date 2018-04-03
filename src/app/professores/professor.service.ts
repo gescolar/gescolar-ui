@@ -16,10 +16,10 @@ export class ProfessorFiltro {
 @Injectable()
 export class ProfessorService {
 
-  ProfessorUrl: string;
+  professorUrl: string;
 
   constructor(private http: AuthHttp) {
-    this.ProfessorUrl = `${environment.apiUrl}/professores`;
+    this.professorUrl = `${environment.apiUrl}/professores`;
   }
 
   pesquisar(filtro: ProfessorFiltro): Promise<any> {
@@ -32,7 +32,7 @@ export class ProfessorService {
       params.set('nome', filtro.nome);
     }
 
-    return this.http.get(`${this.ProfessorUrl}`, { search: params })
+    return this.http.get(`${this.professorUrl}`, { search: params })
       .toPromise()
       .then(response => {
         const responseJson = response.json();
@@ -49,32 +49,32 @@ export class ProfessorService {
   }
 
   listarTodas(): Promise<any> {
-    return this.http.get(this.ProfessorUrl)
+    return this.http.get(this.professorUrl)
       .toPromise()
       .then(response => response.json().content);
   }
 
   excluir(codigo: number): Promise<void> {
-    return this.http.delete(`${this.ProfessorUrl}/${codigo}`)
+    return this.http.delete(`${this.professorUrl}/${codigo}`)
       .toPromise()
       .then(() => null);
   }
 
   adicionar(professor: Professor): Promise<Professor> {
-    return this.http.post(this.ProfessorUrl, JSON.stringify(professor))
+    return this.http.post(this.professorUrl, JSON.stringify(professor))
       .toPromise()
       .then(response => response.json());
   }
 
   atualizar(professor: Professor): Promise<Professor> {
-    return this.http.put(`${this.ProfessorUrl}/${professor.idProfessor}`,
+    return this.http.put(`${this.professorUrl}/${professor.codigo}`,
         JSON.stringify(professor))
       .toPromise()
       .then(response => response.json() as Professor);
   }
 
   buscarPorCodigo(codigo: number): Promise<Professor> {
-    return this.http.get(`${this.ProfessorUrl}/${codigo}`)
+    return this.http.get(`${this.professorUrl}/${codigo}`)
       .toPromise()
       .then(response => response.json() as Professor);
   }

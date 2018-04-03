@@ -24,7 +24,7 @@
 
               <p-column styleClass="col-acoes" header="Editar">
                 <ng-template let-prof="rowData" pTemplate="body">
-                  <a pButton icon="ui-icon-edit" pTooltip="Editar" tooltipPosition="top" [routerLink]="['/professores', prof.idProfessor]"></a>
+                  <a pButton icon="ui-icon-edit" pTooltip="Editar" tooltipPosition="top" [routerLink]="['/professores', prof.codigo]"></a>
                 </ng-template>
               </p-column>
               <p-column styleClass="col-acoes" header="Excluir">
