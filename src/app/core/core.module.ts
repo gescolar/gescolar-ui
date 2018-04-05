@@ -14,7 +14,6 @@ import { JwtHelper } from 'angular2-jwt';
 
 import { AuthService } from './../seguranca/auth.service';
 import { ErrorHandlerService } from './error-handler.service';
-import { NavbarComponent } from './navbar/navbar.component';
 import { NaoAutorizadoComponent } from './nao-autorizado.component';
 import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada.component';
 
@@ -32,12 +31,11 @@ import {MessageService} from 'primeng/components/common/messageservice';
 
     ],
   declarations: [
-    NavbarComponent,
+
     PaginaNaoEncontradaComponent,
     NaoAutorizadoComponent
   ],
   exports: [
-    NavbarComponent,
     ConfirmDialogModule,
     GrowlModule
   ],

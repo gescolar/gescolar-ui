@@ -1,13 +1,35 @@
-<router-outlet></router-outlet>
+<div class="layout-wrapper" (click)="onWrapperClick()"
+    [ngClass]="{'layout-wrapper-static': layoutMode === 'static',
+                'layout-wrapper-active': mobileMenuActive,
+                'layout-menu-horizontal': layoutMode === 'horizontal',
+                'layout-rtl': isRTL}">
 
-<p-growl [(value)]="msgs"></p-growl>
+    <app-menu [reset]="resetMenu"></app-menu>
+
+    <div class="layout-main">
+        <app-topbar></app-topbar>
+
+        <app-breadcrumb></app-breadcrumb>
+
+        <div class="layout-content">
+            <router-outlet></router-outlet>
+
+            <p-growl [(value)]="msgs"></p-growl>
 
 
-<p-confirmDialog header="Confirmação" icon="fa fa-question-circle" #confirmacao>
-  <p-footer>
-    <button type="button" pButton icon="fa-check" label="Sim"
-      (click)="confirmacao.accept()"></button>
-    <button type="button" pButton icon="fa-times" label="Não"
-      (click)="confirmacao.reject()"></button>
-  </p-footer>
-</p-confirmDialog>
+            <p-confirmDialog header="Confirmação" icon="fa fa-question-circle" #confirmacao>
+              <p-footer>
+                <button type="button" pButton icon="fa-check" label="Sim"
+                  (click)="confirmacao.accept()"></button>
+                <button type="button" pButton icon="fa-times" label="Não"
+                  (click)="confirmacao.reject()"></button>
+              </p-footer>
+            </p-confirmDialog>
+
+        </div>
+
+        <app-footer></app-footer>
+        <div class="layout-main-mask" *ngIf="mobileMenuActive"></div>
+    </div>
+
+</div>
