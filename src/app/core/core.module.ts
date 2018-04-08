@@ -1,4 +1,4 @@
-
+import { AlunosService } from './../alunos/alunos.service';
 import { ProfessorService } from './../professores/professor.service';
 
 import { GrowMessageService } from './../shared/grow-message.service';
@@ -46,7 +46,7 @@ import {MessageService} from 'primeng/components/common/messageservice';
     ConfirmationService,
 
     ProfessorService,
-
+    AlunosService,
 
     GrowMessageService,
     JwtHelper,

@@ -6,7 +6,7 @@
 
     <app-menu [reset]="resetMenu"  *ngIf="exibirMenu()" ></app-menu>
 
-    <div class="layout-main">
+    <div  [ngClass]="{'layout-main': exibirMenu() }" >
         <app-topbar  *ngIf="exibirMenu()"></app-topbar>
 
         <app-breadcrumb  *ngIf="exibirMenu()"></app-breadcrumb>
