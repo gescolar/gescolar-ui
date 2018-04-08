@@ -101,10 +101,8 @@ import {TreeTableModule} from 'primeng/primeng';
     OrderListModule,
     TooltipModule,
     InputMaskModule,
-
     BrowserModule,
     FormsModule,
-
     HttpModule,
     BrowserAnimationsModule,
     AccordionModule,

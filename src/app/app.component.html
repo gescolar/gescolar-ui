@@ -4,12 +4,12 @@
                 'layout-menu-horizontal': layoutMode === 'horizontal',
                 'layout-rtl': isRTL}">
 
-    <app-menu [reset]="resetMenu"></app-menu>
+    <app-menu [reset]="resetMenu"  *ngIf="exibirMenu()" ></app-menu>
 
     <div class="layout-main">
-        <app-topbar></app-topbar>
+        <app-topbar  *ngIf="exibirMenu()"></app-topbar>
 
-        <app-breadcrumb></app-breadcrumb>
+        <app-breadcrumb  *ngIf="exibirMenu()"></app-breadcrumb>
 
         <div class="layout-content">
             <router-outlet></router-outlet>
@@ -28,8 +28,11 @@
 
         </div>
 
-        <app-footer></app-footer>
+        <app-footer  *ngIf="exibirMenu()"></app-footer>
         <div class="layout-main-mask" *ngIf="mobileMenuActive"></div>
     </div>
 
 </div>
+
+
+

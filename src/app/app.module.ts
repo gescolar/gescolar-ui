@@ -1,3 +1,5 @@
+import { AlunosModule } from './alunos/alunos.module';
+
 import { AppMenuComponent, AppSubMenuComponent } from './app.menu.component';
 import { BreadcrumbService } from './breadcrumb.service';
 import { AppFooterComponent } from './app.footer.component';
@@ -106,10 +108,11 @@ import {TreeTableModule} from 'primeng/primeng';
     BrowserAnimationsModule,
 
     CoreModule,
+
     SegurancaModule,
     ProfessoresModule,
-    AppRoutingModule,
-    ProfessoresModule,
+    AlunosModule,
+
 
 
     BrowserModule,
@@ -182,11 +185,12 @@ import {TreeTableModule} from 'primeng/primeng';
     ToolbarModule,
     TooltipModule,
     TreeModule,
-    TreeTableModule
+    TreeTableModule,
 
+    AppRoutingModule,
 
   ],
-  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, BreadcrumbService],
+  providers: [BreadcrumbService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import {Component, OnDestroy, Renderer, OnInit, NgZone} from '@angular/core';
 
 @Component({
@@ -37,7 +38,14 @@ export class AppComponent implements OnDestroy, OnInit {
 
     resetMenu: boolean;
 
-    constructor(public renderer: Renderer, public zone: NgZone) {}
+    constructor(public renderer: Renderer,
+                public zone: NgZone,
+                private router: Router) {}
+
+
+    exibirMenu() {
+      return this.router.url !== '/login';
+    }
 
     ngOnInit() {
       this.zone.runOutsideAngular(() => {this.bindRipple(); });

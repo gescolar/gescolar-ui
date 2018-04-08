@@ -1,3 +1,4 @@
+import { ProfessorCadastroComponent } from './professores/professor-cadastro/professor-cadastro.component';
 import { NgModule } from '@angular/core';
 
 

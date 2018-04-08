@@ -46,3 +46,8 @@ export class Usuario {
   login: string;
   tipoUsuario: String;
 }
+
+
+export class Aluno {
+  codigo: number;
+}
