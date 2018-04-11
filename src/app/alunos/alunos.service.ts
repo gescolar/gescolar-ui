@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs/Observable';
 import { URLSearchParams } from '@angular/http';
 import { Injectable } from '@angular/core';
 
@@ -6,6 +7,8 @@ import 'rxjs/add/operator/toPromise';
 
 import { environment } from './../../environments/environment';
 import { Aluno } from './../core/model';
+
+
 
 export class AlunoFiltro {
   nome: string;
@@ -77,6 +80,13 @@ export class AlunosService {
     return this.http.get(`${this.alunoUrl}/${codigo}`)
       .toPromise()
       .then(response => response.json() as Aluno);
+  }
+
+
+  matriculaExistente(matricula: String): Promise<boolean> {
+    return this.http.get(`${this.alunoUrl}/matriculaExistente/${matricula}`)
+      .toPromise()
+      .then(response => response.json());
   }
 
 }

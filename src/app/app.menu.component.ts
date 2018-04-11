@@ -30,7 +30,7 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
             label: 'Adimistrativo', icon: 'list', badge: '2', badgeStyleClass: 'orange-badge',
             items: [
                 {label: 'Professores', icon: 'desktop_mac', routerLink: ['/professores']},
-                {label: 'Alunos', icon: 'desktop_mac', routerLink: ['/alunos/novo']},
+                {label: 'Alunos', icon: 'desktop_mac', routerLink: ['/alunos/nova']},
             ]
         },
 

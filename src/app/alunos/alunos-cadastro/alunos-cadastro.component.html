@@ -1,3 +1,56 @@
-<p>
-  alunos-cadastro works!
-</p>
+<div class="ui-fluid">
+  <div class="card no-margin">
+    <form [formGroup]="formulario" (ngSubmit)="salvar()" autocomplete="off">
+
+      <h1>
+        <h1>{{ editando ? 'Edição de' : 'Novo' }} Aluno</h1>
+      </h1>
+
+      <div class="ui-g form-group">
+
+
+        <div class="ui-g-12 ui-md-7">
+          <span class="md-inputfield">
+            <input type="text" pInputText formControlName="nome" name="nome">
+            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!formulario.controls['nome'].valid&&formulario.controls['nome'].dirty">
+              <span *ngIf="formulario.controls['nome'].errors['required']">O Campo Nome é Obrigatório.</span>
+              <span *ngIf="formulario.controls['nome'].errors['minlength']">O Campo Nome deve conter no mínimo 4 caracteres.</span>
+            </div>
+            <label>Name</label>
+          </span>
+        </div>
+
+
+        <div class="ui-g-12 ui-md-7">
+          <span class="md-inputfield">
+            <input type="text" pInputText formControlName="matricula" name="matricula">
+            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!formulario.controls['matricula'].valid&&formulario.controls['matricula'].dirty">
+              <span *ngIf="formulario.controls['matricula'].errors ? formulario.controls['matricula'].errors['required'] : false">O Campo Matricula é Obrigatório.</span>
+              <span *ngIf="formulario.controls['matricula'].errors ? formulario.controls['matricula'].errors['minlength'] : false">O Campo Matricula deve conter no mínimo 4 caracteres.</span>
+            </div>
+
+            <label>Matricula</label>
+          </span>
+
+
+
+          <div *ngIf="formulario.get('matricula').status === 'PENDING'">
+            Checking...
+          </div>
+          <div *ngIf="formulario.get('matricula').status === 'VALID'">
+            😺 Email is available!
+          </div>
+
+          <div *ngIf="formulario.get('matricula').errors && formulario.get('matricula').errors.matriculaExistente">
+            😢 Oh noes, this email is already taken!
+          </div>
+        </div>
+
+
+
+
+      </div>
+
+    </form>
+  </div>
+</div>
