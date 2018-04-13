@@ -57,16 +57,15 @@
         </div>
 
 
-        <div class="ui-g-12 ui-md-12">
+        <div class="ui-g-12 ui-md-12" style="text-align: center;" >
+          <div class="ui-g-12 ui-md-3 ui-g-nopad" style="text-align: center;" >
 
-          <div class="ui-g-12 ui-md-2">
-              <p-fileUpload name="anexo" mode="basic" auto="true" maxFileSize="100000000" chooseLabel="Adicionar Foto" accept="image/*" [url]="urlUploadAnexo"
-              (onUpload)="aoTerminarUploadAnexo($event)" (onBeforeSend)="antesUploadAnexo($event)"></p-fileUpload>
-           </div>
-            <div class="ui-g-12 ui-md-1">
-              <img src="{{formulario.get('urlFoto').value}}" style="border-radius: 50%" class="circular-image" />
-            </div>
+            <img src="{{formulario.get('urlFoto').value}}" style="border-radius: 50%" class="circular-image" />
 
+            <p-fileUpload name="anexo" mode="basic" auto="true" maxFileSize="100000000" chooseLabel="Adicionar Foto" accept="image/*" [url]="urlUploadAnexo"
+            (onUpload)="aoTerminarUploadAnexo($event)" (onBeforeSend)="antesUploadAnexo($event)"></p-fileUpload>
+
+          </div>
         </div>
 
 

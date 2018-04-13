@@ -40,6 +40,10 @@ export class AlunosCadastroComponent implements OnInit {
     if (codigoAluno) {
       this.carregarAluno(codigoAluno);
     }
+
+    if (!this.formulario.get('urlFoto').value) {
+      this.formulario.get('urlFoto').setValue('https://s3-sa-east-1.amazonaws.com/gescolar/28d3c46b-54bf-452f-92e9-a1299ab9db79_.jpg');
+    }
   }
 
 
