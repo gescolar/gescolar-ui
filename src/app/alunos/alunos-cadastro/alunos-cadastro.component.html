@@ -9,7 +9,7 @@
       <div class="ui-g form-group">
 
 
-        <div class="ui-g-12 ui-md-7">
+        <div class="ui-g-12 ui-md-12">
           <span class="md-inputfield">
             <input type="text" pInputText formControlName="nome" name="nome">
             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!formulario.controls['nome'].valid&&formulario.controls['nome'].dirty">
@@ -21,7 +21,7 @@
         </div>
 
 
-        <div class="ui-g-12 ui-md-7">
+        <div class="ui-g-12 ui-md-12">
           <span class="md-inputfield">
             <input type="text" pInputText formControlName="matricula" name="matricula">
             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!formulario.controls['matricula'].valid&&formulario.controls['matricula'].dirty">
@@ -47,6 +47,27 @@
         </div>
 
 
+
+
+
+        <div class="ui-g-12 ui-md-12">
+          <div class="ui-g-12 ui-md-12"><label>Sexo</label></div>
+          <div class="ui-g-12 ui-md-12"><p-radioButton formControlName="sexo" name="sexo" value="M" label="Masculino"></p-radioButton></div>
+          <div class="ui-g-12 ui-md-12"><p-radioButton formControlName="sexo" name="sexo" value="F" label="Feminino"></p-radioButton></div>
+        </div>
+
+
+        <div class="ui-g-12 ui-md-12">
+
+          <div class="ui-g-12 ui-md-2">
+              <p-fileUpload name="anexo" mode="basic" auto="true" maxFileSize="100000000" chooseLabel="Adicionar Foto" accept="image/*" [url]="urlUploadAnexo"
+              (onUpload)="aoTerminarUploadAnexo($event)" (onBeforeSend)="antesUploadAnexo($event)"></p-fileUpload>
+           </div>
+            <div class="ui-g-12 ui-md-1">
+              <img src="{{formulario.get('urlFoto').value}}" style="border-radius: 50%" class="circular-image" />
+            </div>
+
+        </div>
 
 
       </div>
