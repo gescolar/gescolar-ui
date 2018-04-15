@@ -1,3 +1,4 @@
+import { TurmaService } from './../turmas/turna.service';
 import { AlunosService } from './../alunos/alunos.service';
 import { ProfessorService } from './../professores/professor.service';
 
@@ -47,6 +48,7 @@ import {MessageService} from 'primeng/components/common/messageservice';
 
     ProfessorService,
     AlunosService,
+    TurmaService,
 
     GrowMessageService,
     JwtHelper,

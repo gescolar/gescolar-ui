@@ -1,7 +1,7 @@
-import { AuthHttp } from 'angular2-jwt';
+import { environment } from './../../../environments/environment';
+import { TurmaService } from './../../turmas/turna.service';
 import { Http } from '@angular/http';
 import { Aluno } from './../../core/model';
-import { environment } from './../../../environments/environment';
 import { AlunosService } from './../alunos.service';
 import { GrowMessageService } from './../../shared/grow-message.service';
 import { Title } from '@angular/platform-browser';
@@ -11,7 +11,6 @@ import { ErrorHandlerService } from './../../core/error-handler.service';
 import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
-import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'app-alunos-cadastro',
@@ -21,6 +20,9 @@ import 'rxjs/add/operator/switchMap';
 export class AlunosCadastroComponent implements OnInit {
 
   formulario: FormGroup;
+  turmas = [];
+  uploadEmAndamento = false;
+  pesquisandoMatriculaValida = false;
 
   constructor(private alunoService: AlunosService,
               private errorHandler: ErrorHandlerService,
@@ -29,7 +31,7 @@ export class AlunosCadastroComponent implements OnInit {
               private title: Title,
               private messageService: GrowMessageService,
               private fb: FormBuilder,
-              private http: AuthHttp) { }
+              private turmaService: TurmaService ) { }
 
   ngOnInit() {
 
@@ -40,10 +42,8 @@ export class AlunosCadastroComponent implements OnInit {
     if (codigoAluno) {
       this.carregarAluno(codigoAluno);
     }
-
-    if (!this.formulario.get('urlFoto').value) {
-      this.formulario.get('urlFoto').setValue('https://s3-sa-east-1.amazonaws.com/gescolar/28d3c46b-54bf-452f-92e9-a1299ab9db79_.jpg');
-    }
+    this.carregaFotoDefault();
+    this.carregarTurmas();
   }
 
 
@@ -55,15 +55,21 @@ export class AlunosCadastroComponent implements OnInit {
       [this.validatematricula.bind(this)]),
       'sexo': [],
       'foto': [],
-      'urlFoto': []
+      'urlFoto': [],
+      'turma': this.fb.group({
+        codigo: [ null, Validators.required ],
+        nome: []
+      }),
     });
   }
 
 
 
   validatematricula(control: AbstractControl) {
-    return this.alunoService.matriculaExistente(control.value).then(res => {
-        return res ? { matriculaExistente: true } : null ;
+    this.pesquisandoMatriculaValida = true;
+    return this.alunoService.matriculaExistente(control.value, this.formulario.get('codigo').value).then(res => {
+      this.pesquisandoMatriculaValida = false;
+      return res ? { matriculaExistente: true } : null ;
     });
   }
 
@@ -118,10 +124,12 @@ export class AlunosCadastroComponent implements OnInit {
     }.bind(this), 1);
 
     this.router.navigate(['/alunos/nova']);
+    this.carregaFotoDefault();
   }
 
    antesUploadAnexo(event) {
     event.xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.getItem('token'));
+    this.uploadEmAndamento = true;
   }
 
   get urlUploadAnexo() {
@@ -135,6 +143,12 @@ export class AlunosCadastroComponent implements OnInit {
       foto: foto.nome,
       urlFoto: foto.url
     });
+    this.uploadEmAndamento = false;
+  }
+
+  erroUpload(event) {
+    this.messageService.addErro('Erro ao tentar enviar foto!');
+    this.uploadEmAndamento = false;
   }
 
   atualizarTituloEdicao() {
@@ -142,6 +156,22 @@ export class AlunosCadastroComponent implements OnInit {
   }
 
 
+  carregarTurmas() {
+    return this.turmaService.listarTodas()
+      .then(turmas => {
+        console.log(turmas);
+        this.turmas = turmas
+          .map(t => ({ label: t.nome, value: t.codigo }));
+      })
+      .catch(erro => this.errorHandler.handle(erro));
+  }
+
+
+  carregaFotoDefault() {
+    if (!this.formulario.get('urlFoto').value) {
+      this.formulario.get('urlFoto').setValue(environment.fotoAlunoDefault);
+    }
+  }
 }
 
 

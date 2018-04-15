@@ -51,3 +51,8 @@ export class Usuario {
 export class Aluno {
   codigo: number;
 }
+
+export class Turma {
+  codigo: number;
+  nome: String;
+}

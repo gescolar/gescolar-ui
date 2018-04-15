@@ -83,8 +83,10 @@ export class AlunosService {
   }
 
 
-  matriculaExistente(matricula: String): Promise<boolean> {
-    return this.http.get(`${this.alunoUrl}/matriculaExistente/${matricula}`)
+  matriculaExistente(matricula: String, codigo: string): Promise<boolean> {
+    const params = new URLSearchParams();
+    params.set('codigo', codigo);
+    return this.http.get(`${this.alunoUrl}/matriculaExistente/${matricula}`, { search: params })
       .toPromise()
       .then(response => response.json());
   }

@@ -9,7 +9,7 @@ import { AlunosRoutingModule } from './alunos-routing.module';
 import { ButtonModule } from 'primeng/components/button/button';
 import { InputTextModule } from 'primeng/components/inputtext/inputtext';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DataTableModule, TooltipModule, InputMaskModule, OrderListModule } from 'primeng/primeng';
+import { DataTableModule, TooltipModule, InputMaskModule, OrderListModule, ProgressSpinnerModule } from 'primeng/primeng';
 
 
 import {HttpModule} from '@angular/http';
@@ -173,7 +173,8 @@ import {TreeTableModule} from 'primeng/primeng';
     ToolbarModule,
     TooltipModule,
     TreeModule,
-    TreeTableModule
+    TreeTableModule,
+    ProgressSpinnerModule
   ],
   declarations: [AlunosPesquisaComponent, AlunosCadastroComponent]
 })

@@ -27,48 +27,67 @@
             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!formulario.controls['matricula'].valid&&formulario.controls['matricula'].dirty">
               <span *ngIf="formulario.controls['matricula'].errors ? formulario.controls['matricula'].errors['required'] : false">O Campo Matricula é Obrigatório.</span>
               <span *ngIf="formulario.controls['matricula'].errors ? formulario.controls['matricula'].errors['minlength'] : false">O Campo Matricula deve conter no mínimo 4 caracteres.</span>
+              <span *ngIf="formulario.controls['matricula'].errors ? formulario.controls['matricula'].errors['matriculaExistente'] : false">Matricula já cadastrata.</span>
             </div>
 
             <label>Matricula</label>
           </span>
 
+          <p-progressSpinner [hidden]="!pesquisandoMatriculaValida" [style]="{ width: '25px', height: '25px' }"></p-progressSpinner>
+
+        </div>
 
 
-          <div *ngIf="formulario.get('matricula').status === 'PENDING'">
-            Checking...
-          </div>
-          <div *ngIf="formulario.get('matricula').status === 'VALID'">
-            😺 Email is available!
-          </div>
-
-          <div *ngIf="formulario.get('matricula').errors && formulario.get('matricula').errors.matriculaExistente">
-            😢 Oh noes, this email is already taken!
-          </div>
+        <div class="ui-g-12 ui-md-12" formGroupName="turma">
+          <p-dropdown [options]="turmas" placeholder="Selecione Turma" [filter]="true" [autoWidth]="false" formControlName="codigo"></p-dropdown>
         </div>
 
 
 
-
-
-        <div class="ui-g-12 ui-md-12">
-          <div class="ui-g-12 ui-md-12"><label>Sexo</label></div>
-          <div class="ui-g-12 ui-md-12"><p-radioButton formControlName="sexo" name="sexo" value="M" label="Masculino"></p-radioButton></div>
-          <div class="ui-g-12 ui-md-12"><p-radioButton formControlName="sexo" name="sexo" value="F" label="Feminino"></p-radioButton></div>
+        <div class="ui-g-12 ui-md-2">
+          <div class="ui-g-12 ui-md-12">
+            <label>Sexo</label>
+          </div>
+          <div class="ui-g-12 ui-md-12">
+            <p-radioButton formControlName="sexo" name="sexo" value="M" label="Masculino"></p-radioButton>
+          </div>
+          <div class="ui-g-12 ui-md-12">
+            <p-radioButton formControlName="sexo" name="sexo" value="F" label="Feminino"></p-radioButton>
+          </div>
         </div>
 
 
-        <div class="ui-g-12 ui-md-12" style="text-align: center;" >
-          <div class="ui-g-12 ui-md-3 ui-g-nopad" style="text-align: center;" >
+        <div class="ui-g-12 ui-md-8" style="text-align: center;">
+          <div class="ui-g-12 ui-md-3 ui-g-nopad" style="text-align: center;">
 
             <img src="{{formulario.get('urlFoto').value}}" style="border-radius: 50%" class="circular-image" />
 
-            <p-fileUpload name="anexo" mode="basic" auto="true" maxFileSize="100000000" chooseLabel="Adicionar Foto" accept="image/*" [url]="urlUploadAnexo"
-            (onUpload)="aoTerminarUploadAnexo($event)" (onBeforeSend)="antesUploadAnexo($event)"></p-fileUpload>
+            <p-fileUpload name="anexo" mode="basic" auto="true" maxFileSize="100000000" chooseLabel="Adicionar Foto" accept="image/*"
+              [url]="urlUploadAnexo" (onUpload)="aoTerminarUploadAnexo($event)" (onBeforeSend)="antesUploadAnexo($event)" (onError)="erroUpload($event)"></p-fileUpload>
+
+            <p-progressSpinner [hidden]="!uploadEmAndamento" [style]="{ width: '25px', height: '25px' }"></p-progressSpinner>
 
           </div>
         </div>
 
+      </div>
 
+      <div class="ui-g">
+        <p></p>
+      </div>
+      <hr>
+
+      <div class="ui-g">
+        <div class="ui-g-12 ui-md-3 ">
+          <button pButton type="submit" label="Salvar" [disabled]="formulario.invalid || uploadEmAndamento" icon="ui-icon-save"></button>
+        </div>
+        <div class="ui-g-12 ui-md-3">
+          <button pButton type="button" label="Novo" (click)="novo()" icon="ui-icon-add-circle"></button>
+        </div>
+        <div class="ui-g-12 ui-md-3">
+          <button pButton type="button" icon="ui-icon-arrow-back" label="Voltar Pesquisa" routerLink="/professores">
+          </button>
+        </div>
       </div>
 
     </form>

@@ -5,5 +5,6 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:8080'
+  apiUrl: 'http://localhost:8080',
+  fotoAlunoDefault: 'https://s3-sa-east-1.amazonaws.com/gescolar/dc348929-8a65-44c8-90d5-4241897e9b57_.jpg'
 };
