@@ -1,3 +1,4 @@
+
 export class Endereco {
   logradouro: string;
   numero: string;
@@ -47,12 +48,17 @@ export class Usuario {
   tipoUsuario: String;
 }
 
-
-export class Aluno {
-  codigo: number;
-}
-
 export class Turma {
   codigo: number;
   nome: String;
 }
+
+export class Aluno {
+  codigo: number;
+  nome: string;
+  matricula: string;
+  turma: Turma;
+  urlFoto: string;
+}
+
+

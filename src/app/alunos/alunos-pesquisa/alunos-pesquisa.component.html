@@ -1,3 +1,75 @@
-<p>
-  alunos-pesquisa works!
-</p>
+<div class="ui-fluid">
+  <div class="ui-g">
+    <form autocomplete="off" (ngSubmit)="pesquisar()">
+      <div class="card no-margin">
+        <h1>Alunos</h1>
+        <div class="ui-g form-group">
+          <div class="ui-g-12 ui-md-7">
+            <div class="ui-inputgroup">
+              <span class="md-inputfield">
+                <input type="text" pInputText [(ngModel)]="filtro.nome" name="nome">
+                <label>Pesquisar Aluno Por Nome</label>
+              </span>
+              <button pButton type="submit" icon="ui-icon-search"></button>
+            </div>
+          </div>
+
+
+          <div class="ui-g-12 ui-md-7">
+            <div class="ui-inputgroup">
+              <span class="md-inputfield">
+                <input type="text" pInputText [(ngModel)]="filtro.matricula" name="matricula">
+                <label>Pesquisar Aluno Por Matricula</label>
+              </span>
+              <button pButton type="submit" icon="ui-icon-search"></button>
+            </div>
+          </div>
+
+          <div class="ui-g-12">
+
+            <p-table [value]="alunos" [responsive]="true" [lazy]="true" [totalRecords]="totalRegistros" (onLazyLoad)="aoMudarPagina($event)"
+              [paginator]="true" [rows]="filtro.itensPorPagina">
+
+
+              <ng-template pTemplate="header">
+                <tr>
+                  <th style="width:9em; text-align: center">Foto</th>
+                  <th>Nome</th>
+                  <th>Matricula</th>
+                  <th>Turma</th>
+                  <th style="width:5em; text-align: center">Editar</th>
+                  <th style="width:5em; text-align: center">Excluir</th>
+                </tr>
+              </ng-template>
+
+
+              <ng-template pTemplate="body" let-aluno>
+                <tr>
+                  <td style="width:9em; text-align: center">
+                    <img src="{{aluno.urlFoto}}" style="border-radius: 50%" class="circular-image" />
+                  </td>
+                  <td>{{aluno.nome}}</td>
+                  <td>{{aluno.matricula}}</td>
+                  <td>{{aluno.turma.nome}}</td>
+                  <td style="width:5em; text-align: center">
+                    <a pButton icon="ui-icon-edit" pTooltip="Editar" tooltipPosition="top" [routerLink]="['/alunos', aluno.codigo]"></a>
+                  </td>
+                  <td style="width:5em; text-align: center">
+                    <button pButton icon="ui-icon-delete" pTooltip="Excluir" tooltipPosition="top" (click)="confirmarExclusao(aluno)"></button>
+                  </td>
+
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+
+          <div class="ui-g-12 ui-md-2">
+            <div class="shadow-box ui-shadow-3">
+              <button type="button" label="Adicionar" pButton icon="ui-icon-add" routerLink="/alunos/nova"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

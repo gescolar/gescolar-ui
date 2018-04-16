@@ -12,6 +12,7 @@ import { Aluno } from './../core/model';
 
 export class AlunoFiltro {
   nome: string;
+  matricula: string;
   pagina = 0;
   itensPorPagina = 5;
 }
@@ -35,11 +36,21 @@ export class AlunosService {
       params.set('nome', filtro.nome);
     }
 
+    if (filtro.matricula) {
+      params.set('matricula', filtro.matricula);
+    }
+
     return this.http.get(`${this.alunoUrl}`, { search: params })
       .toPromise()
       .then(response => {
         const responseJson = response.json();
         const alunos = responseJson.content;
+
+        for (const aluno of alunos) {
+          if (aluno.urlFoto === null) {
+            aluno.urlFoto = environment.fotoAlunoDefault;
+          }
+      }
 
         const resultado = {
           alunos,

@@ -6,5 +6,5 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost:8080',
-  fotoAlunoDefault: 'https://s3-sa-east-1.amazonaws.com/gescolar/dc348929-8a65-44c8-90d5-4241897e9b57_.jpg'
+  fotoAlunoDefault: 'https://s3-sa-east-1.amazonaws.com/gescolar/232f56b8-0a40-41a4-a712-2733fa80fcf8_.jpg'
 };

@@ -39,11 +39,12 @@ export class AlunosCadastroComponent implements OnInit {
     this.configuraFormulario();
     this.title.setTitle('Cadastro Professor');
 
+
     if (codigoAluno) {
       this.carregarAluno(codigoAluno);
     }
-    this.carregaFotoDefault();
     this.carregarTurmas();
+    this.carregaFotoDefault();
   }
 
 
@@ -78,6 +79,7 @@ export class AlunosCadastroComponent implements OnInit {
       .then(professor => {
         this.formulario.patchValue(professor);
         this.atualizarTituloEdicao();
+        this.carregaFotoDefault();
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
@@ -168,7 +170,7 @@ export class AlunosCadastroComponent implements OnInit {
 
 
   carregaFotoDefault() {
-    if (!this.formulario.get('urlFoto').value) {
+    if (this.formulario.get('urlFoto').value === null) {
       this.formulario.get('urlFoto').setValue(environment.fotoAlunoDefault);
     }
   }
