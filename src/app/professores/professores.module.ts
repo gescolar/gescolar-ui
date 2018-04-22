@@ -6,7 +6,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProfessorCadastroComponent } from './professor-cadastro/professor-cadastro.component';
 import { ProfessorPesquisaComponent } from './professor-pesquisa/professor-pesquisa.component';
-import { DataTableModule, TooltipModule, InputMaskModule, OrderListModule } from 'primeng/primeng';
+import { DataTableModule, TooltipModule, InputMaskModule, OrderListModule, ProgressSpinnerModule } from 'primeng/primeng';
 
 
 import {HttpModule} from '@angular/http';
@@ -84,7 +84,7 @@ import {ToolbarModule} from 'primeng/primeng';
 import {TreeModule} from 'primeng/primeng';
 import {TreeTableModule} from 'primeng/primeng';
 
-
+import { CpfCnpjModule } from 'ng2-cpf-cnpj';
 
 
 @NgModule({
@@ -171,8 +171,9 @@ import {TreeTableModule} from 'primeng/primeng';
     ToolbarModule,
     TooltipModule,
     TreeModule,
-    TreeTableModule
-
+    TreeTableModule,
+    ProgressSpinnerModule,
+    CpfCnpjModule
 
   ],
   declarations: [ProfessorCadastroComponent,

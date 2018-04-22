@@ -5,7 +5,9 @@
         <h1>{{ editando ? 'Edição de' : 'Novo' }} Professor</h1>
       </h1>
       <div class="ui-g form-group">
-        <div class="ui-g-12 ui-md-7">
+
+
+        <div class="ui-g-12 ui-md-12">
           <span class="md-inputfield">
             <input type="text" pInputText formControlName="nome" name="nome">
             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!formulario.controls['nome'].valid&&formulario.controls['nome'].dirty">
@@ -16,7 +18,21 @@
           </span>
         </div>
 
-        <div class="ui-g-12 ui-md-7">
+
+        <div class="ui-g-12 ui-md-12">
+          <span class="md-inputfield">
+            <p-inputMask mask="999.999.999-99" type="text" [(ngModel)]="cpf" [cpf]="cpf"  formControlName="cpf" name="cpf"></p-inputMask>
+            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!formulario.controls['cpf'].valid&&formulario.controls['cpf'].dirty">
+              <span *ngIf="formulario.controls['cpf'].errors ? formulario.controls['cpf'].errors['required'] : false">O Campo CPF é Obrigatório.</span>
+              <span *ngIf="formulario.controls['cpf'].errors ? formulario.controls['cpf'].errors['cpfExistente'] : false">CPF já cadastrata.</span>
+              <span *ngIf="formulario.controls['cpf'].errors ? formulario.controls['cpf'].errors['cpf'] : false">CPF inválido.</span>
+            </div>
+            <label>CPF</label>
+          </span>
+          <p-progressSpinner [hidden]="!pesquisandocpfValido" [style]="{ width: '25px', height: '25px' }"></p-progressSpinner>
+        </div>
+
+        <div class="ui-g-12 ui-md-12">
           <span class="md-inputfield">
             <input type="text" pInputText formControlName="email" name="email">
             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!formulario.controls['email'].valid&&formulario.controls['email'].dirty">
@@ -26,71 +42,67 @@
           </span>
         </div>
 
-        <div class="ui-g-12 ui-md-7">
+        <div class="ui-g-12 ui-md-12">
           <span class="md-inputfield">
             <p-inputMask mask="(99-9999-9999)" formControlName="telefone" name="telefone"></p-inputMask>
             <label>Telefone</label>
           </span>
         </div>
 
-        <div class="ui-g-12 ui-md-7">
+        <div class="ui-g-12 ui-md-12">
           <span class="md-inputfield">
             <p-inputMask mask="(99-99999-9999)" formControlName="celular" name="celular"></p-inputMask>
             <label>Celular</label>
           </span>
         </div>
-      </div>
 
-      <div class="ui-g">
-        <div class="ui-g-12 ui-md-1">
-          Sexo:
-        </div>
+
         <div class="ui-g-12 ui-md-2">
-          <div class="ui-g">
-            <div class="ui-g-12">
-              <p-radioButton formControlName="sexo" name="sexo" value="M" label="Masculino"></p-radioButton>
-            </div>
-            <div class="ui-g-12">
-              <p-radioButton formControlName="sexo" name="sexo" value="F" label="Feminino"></p-radioButton>
-            </div>
+          <div class="ui-g-12 ui-md-12">
+            <label>Sexo</label>
+          </div>
+          <div class="ui-g-12 ui-md-12">
+            <p-radioButton formControlName="sexo" name="sexo" value="M" label="Masculino"></p-radioButton>
+          </div>
+          <div class="ui-g-12 ui-md-12">
+            <p-radioButton formControlName="sexo" name="sexo" value="F" label="Feminino"></p-radioButton>
           </div>
         </div>
-      </div>
 
-      <div class="ui-g">
-        <div class="ui-g-12 ui-md-1">
-          Foto:
+        <div class="ui-g-12 ui-md-8" style="text-align: center;">
+          <div class="ui-g-12 ui-md-3 ui-g-nopad" style="text-align: center;">
+
+            <img src="{{formulario.get('urlFoto').value}}" style="border-radius: 50%" class="circular-image" />
+
+            <p-fileUpload name="anexo" mode="basic" auto="true" maxFileSize="100000000" chooseLabel="Adicionar Foto" accept="image/*"
+              [url]="urlUploadAnexo" (onUpload)="aoTerminarUploadAnexo($event)" (onBeforeSend)="antesUploadAnexo($event)" (onError)="erroUpload($event)"></p-fileUpload>
+
+            <p-progressSpinner [hidden]="!uploadEmAndamento" [style]="{ width: '25px', height: '25px' }"></p-progressSpinner>
+
+          </div>
         </div>
-        <div class="ui-g-12 ui-md-1">
-          <img src="{{formulario.get('urlFoto').value}}" style="border-radius: 50%" class="circular-image" />
-          <p-fileUpload name="anexo" mode="basic" auto="true" maxFileSize="100000000" chooseLabel="Uplod" accept="image/*" [url]="urlUploadAnexo"
-            (onUpload)="aoTerminarUploadAnexo($event)" (onBeforeSend)="antesUploadAnexo($event)"></p-fileUpload>
-        </div>
+
       </div>
-
-
 
       <div class="ui-g">
         <p></p>
-
       </div>
       <hr>
 
-
-
-
       <div class="ui-g">
-        <div class="ui-g-12 ui-md-1 ">
-          <button pButton type="submit" label="Salvar" [disabled]="formulario.invalid" icon="ui-icon-save"></button>
+        <div class="ui-g-12 ui-md-3 ">
+          <button pButton type="submit" label="Salvar" [disabled]="formulario.invalid || uploadEmAndamento" icon="ui-icon-save"></button>
         </div>
-        <div class="ui-g-12 ui-md-1">
+        <div class="ui-g-12 ui-md-3">
           <button pButton type="button" label="Novo" (click)="novo()" icon="ui-icon-add-circle"></button>
         </div>
-        <div class="ui-g-12 ui-md-1">
+        <div class="ui-g-12 ui-md-3">
           <button pButton type="button" icon="ui-icon-arrow-back" label="Voltar Pesquisa" routerLink="/professores">
           </button>
         </div>
       </div>
+
+
     </form>
   </div>
 </div>

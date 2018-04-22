@@ -38,6 +38,12 @@ export class ProfessorService {
         const responseJson = response.json();
         const professores = responseJson.content;
 
+        for (const prof of professores) {
+          if (prof.urlFoto === null) {
+            prof.urlFoto = environment.fotoProfessor;
+          }
+        }
+
         const resultado = {
           professores,
           total: responseJson.totalElements
@@ -77,6 +83,15 @@ export class ProfessorService {
     return this.http.get(`${this.professorUrl}/${codigo}`)
       .toPromise()
       .then(response => response.json() as Professor);
+  }
+
+
+  cpfExistente(cpf: String, codigo: string): Promise<boolean> {
+    const params = new URLSearchParams();
+    params.set('codigo', codigo);
+    return this.http.get(`${this.professorUrl}/cpfExistente/${cpf}`, { search: params })
+      .toPromise()
+      .then(response => response.json());
   }
 
 }

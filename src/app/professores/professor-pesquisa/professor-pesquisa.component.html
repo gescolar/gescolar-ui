@@ -23,8 +23,9 @@
 
               <ng-template pTemplate="header">
                 <tr>
+                    <th style="width:9em; text-align: center">Foto</th>
                     <th>Nome</th>
-                    <th>Telefone</th>
+                    <th>CPF</th>
                     <th>Celular</th>
                     <th>Email</th>
                     <th style="width:5em; text-align: center">Editar</th>
@@ -35,8 +36,11 @@
 
             <ng-template pTemplate="body" let-prof>
             <tr>
+                <td style="width:9em; text-align: center">
+                    <img src="{{prof.urlFoto}}" style="border-radius: 50%" class="circular-image" />
+                </td>
                 <td>{{prof.nome}}</td>
-                <td>{{prof.telefone}}</td>
+                <td>{{prof.cpf}}</td>
                 <td>{{prof.celular}}</td>
                 <td>{{prof.email}}</td>
                 <td style="width:5em; text-align: center"><a pButton icon="ui-icon-edit" pTooltip="Editar" tooltipPosition="top" [routerLink]="['/professores', prof.codigo]"></a></td>
