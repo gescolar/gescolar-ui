@@ -61,4 +61,12 @@ export class Aluno {
   urlFoto: string;
 }
 
-
+export class Responsavel {
+  codigo: number;
+  nome: string;
+  cpf: string;
+  email: string;
+  celular: string;
+  telefone: string;
+  sexo: string;
+}

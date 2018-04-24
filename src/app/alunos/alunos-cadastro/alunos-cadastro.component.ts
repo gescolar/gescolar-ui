@@ -1,7 +1,7 @@
 import { environment } from './../../../environments/environment';
 import { TurmaService } from './../../turmas/turna.service';
 import { Http } from '@angular/http';
-import { Aluno } from './../../core/model';
+import { Aluno, Responsavel } from './../../core/model';
 import { AlunosService } from './../alunos.service';
 import { GrowMessageService } from './../../shared/grow-message.service';
 import { Title } from '@angular/platform-browser';
@@ -21,8 +21,13 @@ export class AlunosCadastroComponent implements OnInit {
 
   formulario: FormGroup;
   turmas = [];
+  responsaveis = [];
   uploadEmAndamento = false;
   pesquisandoMatriculaValida = false;
+
+
+  exbindoFormularioResp = false;
+  responsavel: Responsavel;
 
   constructor(private alunoService: AlunosService,
               private errorHandler: ErrorHandlerService,
@@ -76,8 +81,8 @@ export class AlunosCadastroComponent implements OnInit {
 
   carregarAluno(codigo: number) {
     this.alunoService.buscarPorCodigo(codigo)
-      .then(professor => {
-        this.formulario.patchValue(professor);
+      .then(aluno => {
+        this.formulario.patchValue(aluno);
         this.atualizarTituloEdicao();
         this.carregaFotoDefault();
       })
@@ -173,6 +178,20 @@ export class AlunosCadastroComponent implements OnInit {
     if (this.formulario.get('urlFoto').value === null) {
       this.formulario.get('urlFoto').setValue(environment.fotoAlunoDefault);
     }
+  }
+
+
+
+  adicionarResp() {
+    this.exbindoFormularioResp = true;
+    this.responsavel = new Responsavel();
+
+  }
+
+
+
+  confirmarResp(frm: FormControl) {
+    frm.reset();
   }
 }
 
