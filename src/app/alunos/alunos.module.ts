@@ -1,3 +1,4 @@
+import { CpfCnpjModule } from 'ng2-cpf-cnpj';
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -174,7 +175,8 @@ import {TreeTableModule} from 'primeng/primeng';
     TooltipModule,
     TreeModule,
     TreeTableModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    CpfCnpjModule
   ],
   declarations: [AlunosPesquisaComponent, AlunosCadastroComponent]
 })

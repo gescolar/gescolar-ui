@@ -10,6 +10,7 @@ import { ErrorHandlerService } from './../../core/error-handler.service';
 
 import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { ResponsavelService } from '../responsavel.service';
 
 
 @Component({
@@ -20,6 +21,7 @@ import { Component, OnInit } from '@angular/core';
 export class AlunosCadastroComponent implements OnInit {
 
   formulario: FormGroup;
+  formularioResp: FormGroup;
   turmas = [];
   responsaveis = [];
   uploadEmAndamento = false;
@@ -28,6 +30,8 @@ export class AlunosCadastroComponent implements OnInit {
 
   exbindoFormularioResp = false;
   responsavel: Responsavel;
+  emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$';
+
 
   constructor(private alunoService: AlunosService,
               private errorHandler: ErrorHandlerService,
@@ -36,7 +40,8 @@ export class AlunosCadastroComponent implements OnInit {
               private title: Title,
               private messageService: GrowMessageService,
               private fb: FormBuilder,
-              private turmaService: TurmaService ) { }
+              private turmaService: TurmaService,
+              private responsavelService: ResponsavelService ) { }
 
   ngOnInit() {
 
@@ -186,8 +191,24 @@ export class AlunosCadastroComponent implements OnInit {
     this.exbindoFormularioResp = true;
     this.responsavel = new Responsavel();
 
+    this.formularioResp = this.fb.group({
+     'codigo': [],
+     'nome' : new FormControl('', Validators.compose([Validators.required, Validators.minLength(4)])),
+     'cpf': new FormControl('', Validators.compose([Validators.required]),
+      [this.validateCpf.bind(this)]),
+     'parentesco': [],
+     'email': new FormControl('', Validators.compose([Validators.pattern(this.emailPattern)])),
+     'celular': [],
+     'telefone': [],
+   });
+
   }
 
+  validateCpf(control: AbstractControl) {
+    return this.responsavelService.cpfExistente(control.value, this.formularioResp.get('codigo').value).then(res => {
+       return res ? { cpfExistente: true } : null ;
+    });
+  }
 
 
   confirmarResp(frm: FormControl) {
