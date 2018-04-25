@@ -16,38 +16,41 @@
 
           <div class="ui-g-12">
 
-            <p-table [value]="professores"  [responsive]="true" [lazy]="true"
-            [totalRecords]="totalRegistros" (onLazyLoad)="aoMudarPagina($event)"
-            [paginator]="true" [rows]="filtro.itensPorPagina">
+            <p-table [value]="professores" [responsive]="true" [lazy]="true" [totalRecords]="totalRegistros" (onLazyLoad)="aoMudarPagina($event)"
+              [paginator]="true" [rows]="filtro.itensPorPagina">
 
 
               <ng-template pTemplate="header">
                 <tr>
-                    <th style="width:9em; text-align: center">Foto</th>
-                    <th>Nome</th>
-                    <th>CPF</th>
-                    <th>Celular</th>
-                    <th>Email</th>
-                    <th style="width:5em; text-align: center">Editar</th>
-                    <th style="width:5em; text-align: center">Excluir</th>
+                  <th style="width:9em; text-align: center">Foto</th>
+                  <th>Nome</th>
+                  <th>CPF</th>
+                  <th>Celular</th>
+                  <th>Email</th>
+                  <th style="width:5em; text-align: center">Editar</th>
+                  <th style="width:5em; text-align: center">Excluir</th>
                 </tr>
-            </ng-template>
+              </ng-template>
 
 
-            <ng-template pTemplate="body" let-prof>
-            <tr>
-                <td style="width:9em; text-align: center">
-                    <img src="{{prof.urlFoto}}" style="border-radius: 50%" class="circular-image" />
-                </td>
-                <td>{{prof.nome}}</td>
-                <td>{{prof.cpf}}</td>
-                <td>{{prof.celular}}</td>
-                <td>{{prof.email}}</td>
-                <td style="width:5em; text-align: center"><a pButton icon="ui-icon-edit" pTooltip="Editar" tooltipPosition="top" [routerLink]="['/professores', prof.codigo]"></a></td>
-                <td style="width:5em; text-align: center"> <button pButton icon="ui-icon-delete" pTooltip="Excluir" tooltipPosition="top" (click)="confirmarExclusao(prof)"></button></td>
+              <ng-template pTemplate="body" let-prof>
+                <tr>
+                  <td style="width:9em; text-align: center">
+                    <img src="{{prof.urlFoto}}" style="border-radius: 50%" class="circular-image"   height="42" width="42"/>
+                  </td>
+                  <td>{{prof.nome}}</td>
+                  <td>{{prof.cpf}}</td>
+                  <td>{{prof.celular}}</td>
+                  <td>{{prof.email}}</td>
+                  <td style="width:5em; text-align: center">
+                    <a pButton icon="ui-icon-edit" pTooltip="Editar" tooltipPosition="top" [routerLink]="['/professores', prof.codigo]"></a>
+                  </td>
+                  <td style="width:5em; text-align: center">
+                    <button pButton icon="ui-icon-delete" pTooltip="Excluir" tooltipPosition="top" (click)="confirmarExclusao(prof)"></button>
+                  </td>
 
-            </tr>
-        </ng-template>
+                </tr>
+              </ng-template>
 
 
 
