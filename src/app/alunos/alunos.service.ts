@@ -6,7 +6,7 @@ import { AuthHttp } from 'angular2-jwt';
 import 'rxjs/add/operator/toPromise';
 
 import { environment } from './../../environments/environment';
-import { Aluno } from './../core/model';
+import { Aluno, Responsavel } from './../core/model';
 
 
 
@@ -74,7 +74,8 @@ export class AlunosService {
       .then(() => null);
   }
 
-  adicionar(aluno: Aluno): Promise<Aluno> {
+  adicionar(aluno: Aluno, responsaveis: Responsavel []): Promise<Aluno> {
+    aluno.responsaveis = responsaveis;
     return this.http.post(this.alunoUrl, JSON.stringify(aluno))
       .toPromise()
       .then(response => response.json());

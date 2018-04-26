@@ -109,7 +109,7 @@ export class AlunosCadastroComponent implements OnInit {
   }
 
   adicionarAluno() {
-    this.alunoService.adicionar(this.formulario.value)
+    this.alunoService.adicionar(this.formulario.value, this.responsaveis)
       .then(alunoAdicionado => {
         this.messageService.addSucesso('Aluno adicionado com sucesso!');
         this.router.navigate(['/alunos', alunoAdicionado.codigo]);
@@ -187,7 +187,7 @@ export class AlunosCadastroComponent implements OnInit {
 
 
 
-  adicionarResp() {
+  novoResp() {
     this.exbindoFormularioResp = true;
     this.responsavel = new Responsavel();
 
@@ -211,8 +211,9 @@ export class AlunosCadastroComponent implements OnInit {
   }
 
 
-  confirmarResp(frm: FormControl) {
-    frm.reset();
+  addResp() {
+    this.exbindoFormularioResp = false;
+    this.responsaveis.push(this.formularioResp.value);
   }
 }
 

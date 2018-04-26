@@ -59,6 +59,7 @@ export class Aluno {
   matricula: string;
   turma: Turma;
   urlFoto: string;
+  responsaveis: Responsavel[];
 }
 
 export class Responsavel {
