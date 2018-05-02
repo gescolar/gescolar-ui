@@ -74,7 +74,7 @@
         <div class="ui-g-12 ui-md-12">
 
 
-          <p-fieldset legend="Responsáveis" [toggleable]="true">
+          <p-fieldset legend="Responsáveis" [toggleable]="true" [collapsed]="true">
 
             <div class="ui-g-12 ui-md-2">
               <button pButton type="button" label="Adicionar" (click)="novoResp()" icon="ui-icon-add-circle"></button>
@@ -92,20 +92,28 @@
                     <th>Parentesco</th>
                     <th>CPF</th>
                     <th>Celular</th>
+                    <th style="width:5em; text-align: center">Editar</th>
+                    <th style="width:5em; text-align: center">Excluir</th>
                   </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-resp>
+                <ng-template pTemplate="body" let-resp let-rowIndex="rowIndex">
                   <tr>
                     <td>{{resp.nome}}</td>
                     <td>{{resp.parentesco}}</td>
                     <td>{{resp.cpf}}</td>
                     <td>{{resp.celular}}</td>
+                    <td style="width:5em; text-align: center">
+                      <a pButton icon="ui-icon-edit" pTooltip="Editar" tooltipPosition="top" (click)="prepararEdicaoResp(resp, rowIndex)" ></a>
+                    </td>
+                    <td style="width:5em; text-align: center">
+                      <button pButton icon="ui-icon-delete" pTooltip="Excluir" tooltipPosition="top" (click)="confirmarExclusao(aluno)"></button>
+                    </td>
                   </tr>
                 </ng-template>
 
                 <ng-template pTemplate="emptymessage">
                   <tr>
-                    <td colspan="4">
+                    <td colspan="6">
                       Nenhum Responsável Cadastrado
                     </td>
                   </tr>

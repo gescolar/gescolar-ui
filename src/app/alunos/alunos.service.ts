@@ -81,7 +81,8 @@ export class AlunosService {
       .then(response => response.json());
   }
 
-  atualizar(aluno: Aluno): Promise<Aluno> {
+  atualizar(aluno: Aluno, responsaveis: Responsavel []): Promise<Aluno> {
+    aluno.responsaveis = responsaveis;
     return this.http.put(`${this.alunoUrl}/${aluno.codigo}`,
         JSON.stringify(aluno))
       .toPromise()

@@ -31,6 +31,7 @@ export class AlunosCadastroComponent implements OnInit {
   exbindoFormularioResp = false;
   responsavel: Responsavel;
   emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$';
+  contatoIndex: number;
 
 
   constructor(private alunoService: AlunosService,
@@ -87,9 +88,11 @@ export class AlunosCadastroComponent implements OnInit {
   carregarAluno(codigo: number) {
     this.alunoService.buscarPorCodigo(codigo)
       .then(aluno => {
+       this.initFormResp();
         this.formulario.patchValue(aluno);
         this.atualizarTituloEdicao();
         this.carregaFotoDefault();
+        this.responsaveis = aluno.responsaveis;
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
@@ -118,7 +121,7 @@ export class AlunosCadastroComponent implements OnInit {
   }
 
   atualizarAluno() {
-    this.alunoService.atualizar(this.formulario.value)
+    this.alunoService.atualizar(this.formulario.value, this.responsaveis)
       .then(aluno => {
         this.formulario.patchValue(aluno);
 
@@ -187,22 +190,31 @@ export class AlunosCadastroComponent implements OnInit {
 
 
 
-  novoResp() {
-    this.exbindoFormularioResp = true;
-    this.responsavel = new Responsavel();
 
-    this.formularioResp = this.fb.group({
-     'codigo': [],
-     'nome' : new FormControl('', Validators.compose([Validators.required, Validators.minLength(4)])),
-     'cpf': new FormControl('', Validators.compose([Validators.required]),
-      [this.validateCpf.bind(this)]),
-     'parentesco': [],
-     'email': new FormControl('', Validators.compose([Validators.pattern(this.emailPattern)])),
-     'celular': [],
-     'telefone': [],
-   });
+
+
+  novoResp() {
+    this.responsavel = new Responsavel();
+    this.exbindoFormularioResp = true;
+    this.initFormResp();
+    this.contatoIndex = this.responsaveis.length;
 
   }
+
+
+initFormResp() {
+  this.formularioResp = this.fb.group({
+    'codigo': [],
+    'nome' : new FormControl('', Validators.compose([Validators.required, Validators.minLength(4)])),
+    'cpf': new FormControl('', Validators.compose([Validators.required]),
+     [this.validateCpf.bind(this)]),
+    'parentesco': [],
+    'email': new FormControl('', Validators.compose([Validators.pattern(this.emailPattern)])),
+    'celular': [],
+    'telefone': [],
+  });
+}
+
 
   validateCpf(control: AbstractControl) {
     return this.responsavelService.cpfExistente(control.value, this.formularioResp.get('codigo').value).then(res => {
@@ -213,9 +225,27 @@ export class AlunosCadastroComponent implements OnInit {
 
   addResp() {
     this.exbindoFormularioResp = false;
-    this.responsaveis.push(this.formularioResp.value);
+    this.responsaveis[this.contatoIndex] = this.formularioResp.value;
+  }
+
+  clonarResp(resp: Responsavel): Responsavel {
+    return new Responsavel(resp.codigo, resp.nome, resp.cpf,
+      resp.email, resp.celular, resp.telefone, resp.parentesco);
+  }
+
+  prepararEdicaoResp(resp: Responsavel, index: number) {
+    this.responsavel = new Responsavel();
+    this.exbindoFormularioResp = true;
+    setTimeout(function () {
+      this.initFormResp();
+      this.formularioResp.patchValue(this.clonarResp(resp));
+    }.bind(this), 1);
+    this.formularioResp.get('cpf').setValue(resp.cpf);
+    this.contatoIndex = index;
+
   }
 }
+
 
 
 

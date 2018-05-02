@@ -69,5 +69,17 @@ export class Responsavel {
   email: string;
   celular: string;
   telefone: string;
-  sexo: string;
+  parentesco: string;
+
+
+  constructor (codigo?: number, nome?: string, cpf?: string, email?: string, celular?: string, telefone?: string, parentesco?: string ) {
+    this.codigo = codigo;
+    this.nome = nome;
+    this.cpf = cpf;
+    this.email = email;
+    this.celular = celular;
+    this.telefone = telefone;
+    this.parentesco = parentesco;
+
+  }
 }
