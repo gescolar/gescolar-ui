@@ -86,10 +86,11 @@ export class ProfessorService {
   }
 
 
-  cpfExistente(cpf: String, codigo: string): Promise<boolean> {
+  cpfExistente(cpf: string, codigo: string): Promise<boolean> {
     const params = new URLSearchParams();
     params.set('codigo', codigo);
-    return this.http.get(`${this.professorUrl}/cpfExistente/${cpf}`, { search: params })
+    params.set('cpf', cpf);
+    return this.http.get(`${this.professorUrl}/cpfExistente`, { search: params })
       .toPromise()
       .then(response => response.json());
   }

@@ -51,7 +51,7 @@ export class ProfessorCadastroComponent implements OnInit {
     this.formulario = this.fb.group({
       'codigo': [],
       'nome': new FormControl('', Validators.compose([Validators.required, Validators.minLength(4)])),
-      'email': new FormControl('', Validators.compose([Validators.pattern(this.emailPattern)])),
+      'email': new FormControl('', Validators.compose([Validators.required, Validators.pattern(this.emailPattern)])),
       'cpf': new FormControl('', Validators.compose([Validators.required]),
       [this.validateCpf.bind(this)]),
       'telefone': [],

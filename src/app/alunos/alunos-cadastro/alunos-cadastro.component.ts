@@ -32,7 +32,7 @@ export class AlunosCadastroComponent implements OnInit {
   responsavel: Responsavel;
   emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$';
   contatoIndex: number;
-
+  pesquisandocpfValido = false;
 
   constructor(private alunoService: AlunosService,
               private errorHandler: ErrorHandlerService,
@@ -188,11 +188,6 @@ export class AlunosCadastroComponent implements OnInit {
     }
   }
 
-
-
-
-
-
   novoResp() {
     this.responsavel = new Responsavel();
     this.exbindoFormularioResp = true;
@@ -206,7 +201,7 @@ initFormResp() {
   this.formularioResp = this.fb.group({
     'codigo': [],
     'nome' : new FormControl('', Validators.compose([Validators.required, Validators.minLength(4)])),
-    'cpf': new FormControl('', Validators.compose([Validators.required]),
+    'cpf': new FormControl('', Validators.compose([Validators.required, this.validateLocalCpf.bind(this)]),
      [this.validateCpf.bind(this)]),
     'parentesco': [],
     'email': new FormControl('', Validators.compose([Validators.pattern(this.emailPattern)])),
@@ -216,11 +211,28 @@ initFormResp() {
 }
 
 
-  validateCpf(control: AbstractControl) {
-    return this.responsavelService.cpfExistente(control.value, this.formularioResp.get('codigo').value).then(res => {
-       return res ? { cpfExistente: true } : null ;
-    });
+  validateLocalCpf(control: AbstractControl) {
+    if (this.formularioResp && this.formularioResp.get('codigo').value === null && this.responsaveis && control && control.value
+      && control.value.length === 14 &&
+      this.responsaveis[this.contatoIndex] && this.responsaveis[this.contatoIndex].cpf === control.value) {
+      return null;
+    }
+    if (this.responsaveis && control && control.value && control.value.length === 14) {
+      for (const resp of this.responsaveis) {
+        if (resp.cpf === control.value) {
+          return { cpfExistenteLocal: true };
+        }
+      }
+    }
   }
+
+validateCpf(control: AbstractControl) {
+  this.pesquisandocpfValido = true;
+  return this.responsavelService.cpfExistente(control.value, this.formularioResp.get('codigo').value).then(res => {
+    this.pesquisandocpfValido = false;
+    return res ? { cpfExistente: true } : null ;
+  });
+}
 
 
   addResp() {
@@ -238,9 +250,14 @@ initFormResp() {
     this.exbindoFormularioResp = true;
     setTimeout(function () {
       this.initFormResp();
+    }.bind(this), 1);
+
+    setTimeout(function () {
       this.formularioResp.patchValue(this.clonarResp(resp));
     }.bind(this), 1);
-    this.formularioResp.get('cpf').setValue(resp.cpf);
+
+
+
     this.contatoIndex = index;
 
   }

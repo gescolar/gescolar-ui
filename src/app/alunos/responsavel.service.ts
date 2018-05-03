@@ -79,10 +79,11 @@ export class ResponsavelService {
   }
 
 
-  cpfExistente(cpf: String, codigo: string): Promise<boolean> {
+  cpfExistente(cpf: string, codigo: string): Promise<boolean> {
     const params = new URLSearchParams();
     params.set('codigo', codigo);
-    return this.http.get(`${this.responsavelUrl}/cpfExistente/${cpf}`, { search: params })
+    params.set('cpf', cpf);
+    return this.http.get(`${this.responsavelUrl}/cpfExistente`, { search: params })
       .toPromise()
       .then(response => response.json());
   }

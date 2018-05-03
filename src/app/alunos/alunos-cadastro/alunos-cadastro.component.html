@@ -173,7 +173,8 @@
           <p-inputMask mask="999.999.999-99" type="text" [cpf]="cpf" [(ngModel)]="cpf" formControlName="cpf" name="cpf"></p-inputMask>
           <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!formularioResp.controls['cpf'].valid&&formularioResp.controls['cpf'].dirty">
             <span *ngIf="formularioResp.controls['cpf'].errors ? formularioResp.controls['cpf'].errors['required'] : false">O Campo CPF é Obrigatório.</span>
-            <span *ngIf="formularioResp.controls['cpf'].errors ? formularioResp.controls['cpf'].errors['cpfExistente'] : false">CPF já cadastrata.</span>
+            <span *ngIf="formularioResp.controls['cpf'].errors ? formularioResp.controls['cpf'].errors['cpfExistente'] : false">CPF já Cadastrato.</span>
+            <span *ngIf="formularioResp.controls['cpf'].errors ? formularioResp.controls['cpf'].errors['cpfExistenteLocal'] : false">CPF já Cadastrato.</span>
             <span *ngIf="formularioResp.controls['cpf'].errors ? formularioResp.controls['cpf'].errors['cpf'] : false">CPF inválido.</span>
           </div>
           <label>CPF</label>
