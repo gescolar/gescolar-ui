@@ -43,15 +43,14 @@ export class TurmaService {
           total: responseJson.totalElements
         };
 
-        console.log(resultado);
-        return resultado;
+         return resultado;
       });
   }
 
   listarTodas(): Promise<any> {
-    return this.http.get(this.turmaUrl + '/listar')
+    return this.http.get(this.turmaUrl)
       .toPromise()
-      .then(response => response.json());
+      .then(response => response.json().content);
   }
 
   excluir(codigo: number): Promise<void> {
@@ -78,5 +77,6 @@ export class TurmaService {
       .toPromise()
       .then(response => response.json() as Turma);
   }
+
 
 }

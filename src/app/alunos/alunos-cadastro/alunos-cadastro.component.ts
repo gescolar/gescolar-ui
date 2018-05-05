@@ -1,5 +1,5 @@
+import { TurmaService } from './../../turma/turma.service';
 import { environment } from './../../../environments/environment';
-import { TurmaService } from './../../turmas/turna.service';
 import { Http } from '@angular/http';
 import { Aluno, Responsavel } from './../../core/model';
 import { AlunosService } from './../alunos.service';

@@ -1,5 +1,5 @@
+import { TurmaService } from './../turma/turma.service';
 import { ResponsavelService } from './../alunos/responsavel.service';
-import { TurmaService } from './../turmas/turna.service';
 import { AlunosService } from './../alunos/alunos.service';
 import { ProfessorService } from './../professores/professor.service';
 

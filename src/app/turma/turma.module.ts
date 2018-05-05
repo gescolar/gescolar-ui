@@ -1,33 +1,24 @@
-import { TurmaModule } from './turma/turma.module';
-import { AlunosModule } from './alunos/alunos.module';
-
-import { AppMenuComponent, AppSubMenuComponent } from './app.menu.component';
-import { BreadcrumbService } from './breadcrumb.service';
-import { AppFooterComponent } from './app.footer.component';
-import { AppTopBarComponent } from './app.topbar.component';
-import { AppBreadcrumbComponent } from './app.breadcrumb.component';
-
-
-import { HttpModule } from '@angular/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { BrowserModule } from '@angular/platform-browser';
+import { TurmaPesquisaComponent } from './turma-pesquisa/turma-pesquisa.component';
+import { TurmaCadastroComponent } from './turma-cadastro/turma-cadastro.component';
+import { ButtonModule } from 'primeng/components/button/button';
+import { InputTextModule } from 'primeng/components/inputtext/inputtext';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
-import { AppComponent } from './app.component';
-import { CoreModule } from './core/core.module';
-import { SegurancaModule } from './seguranca/seguranca.module';
-import { AppRoutingModule } from './app-routing.module';
-import { ProfessoresModule } from './professores/professores.module';
+import { CommonModule } from '@angular/common';
+import { DataTableModule, TooltipModule, InputMaskModule, OrderListModule, ProgressSpinnerModule } from 'primeng/primeng';
 
-import {FormsModule} from '@angular/forms';
+
+import {HttpModule} from '@angular/http';
+import {BrowserModule} from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {LocationStrategy, HashLocationStrategy} from '@angular/common';
+
 import 'rxjs/add/operator/toPromise';
-
-
 
 import {AccordionModule} from 'primeng/primeng';
 import {AutoCompleteModule} from 'primeng/primeng';
 import {BreadcrumbModule} from 'primeng/primeng';
-import {ButtonModule} from 'primeng/primeng';
+
 import {CalendarModule} from 'primeng/primeng';
 import {CarouselModule} from 'primeng/primeng';
 import {ChartModule} from 'primeng/primeng';
@@ -41,7 +32,7 @@ import {ContextMenuModule} from 'primeng/primeng';
 import {DataGridModule} from 'primeng/primeng';
 import {DataListModule} from 'primeng/primeng';
 import {DataScrollerModule} from 'primeng/primeng';
-import {DataTableModule} from 'primeng/primeng';
+
 import {DialogModule} from 'primeng/primeng';
 import {DragDropModule} from 'primeng/primeng';
 import {DropdownModule} from 'primeng/primeng';
@@ -51,9 +42,9 @@ import {FileUploadModule} from 'primeng/primeng';
 import {GalleriaModule} from 'primeng/primeng';
 import {GMapModule} from 'primeng/primeng';
 import {GrowlModule} from 'primeng/primeng';
-import {InputMaskModule} from 'primeng/primeng';
+
 import {InputSwitchModule} from 'primeng/primeng';
-import {InputTextModule} from 'primeng/primeng';
+
 import {InputTextareaModule} from 'primeng/primeng';
 import {LightboxModule} from 'primeng/primeng';
 import {ListboxModule} from 'primeng/primeng';
@@ -62,7 +53,7 @@ import {MenuModule} from 'primeng/primeng';
 import {MenubarModule} from 'primeng/primeng';
 import {MessagesModule} from 'primeng/primeng';
 import {MultiSelectModule} from 'primeng/primeng';
-import {OrderListModule} from 'primeng/primeng';
+
 import {OrganizationChartModule} from 'primeng/primeng';
 import {OverlayPanelModule} from 'primeng/primeng';
 import {PaginatorModule} from 'primeng/primeng';
@@ -88,34 +79,28 @@ import {TerminalModule} from 'primeng/primeng';
 import {TieredMenuModule} from 'primeng/primeng';
 import {ToggleButtonModule} from 'primeng/primeng';
 import {ToolbarModule} from 'primeng/primeng';
-import {TooltipModule} from 'primeng/primeng';
+
 import {TreeModule} from 'primeng/primeng';
 import {TreeTableModule} from 'primeng/primeng';
 
+import { CpfCnpjModule } from 'ng2-cpf-cnpj';
+import { TurmaRoutingModule } from './turma-routing.module';
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-
-   AppMenuComponent,
-   AppSubMenuComponent,
-   AppBreadcrumbComponent,
-   AppTopBarComponent,
-   AppFooterComponent,
-  ],
   imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
+    CommonModule,
+    TurmaRoutingModule,
 
-    CoreModule,
+    FormsModule,
+    ReactiveFormsModule,
 
-    SegurancaModule,
-    ProfessoresModule,
-    AlunosModule,
-    TurmaModule,
-
-
+    InputTextModule,
+    ButtonModule,
+    DataTableModule,
+    OrderListModule,
+    TooltipModule,
+    InputMaskModule,
     BrowserModule,
     FormsModule,
     HttpModule,
@@ -187,11 +172,10 @@ import {TreeTableModule} from 'primeng/primeng';
     TooltipModule,
     TreeModule,
     TreeTableModule,
-
-    AppRoutingModule,
+    ProgressSpinnerModule,
+    CpfCnpjModule
 
   ],
-  providers: [BreadcrumbService],
-  bootstrap: [AppComponent]
+  declarations: [TurmaCadastroComponent, TurmaPesquisaComponent]
 })
-export class AppModule { }
+export class TurmaModule { }
